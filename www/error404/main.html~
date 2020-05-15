@@ -1,0 +1,14 @@
+<html>
+<title>Pagina no encontrada - JoropoCafe</title>
+<link href="main.css" type="text/css" rel="stylesheet">
+<body>
+<div class="noise"></div>
+<div class="overlay"></div>
+<div class="terminal">
+  <h1>Error <span class="errorcode">404</span></h1>
+  <p class="output">La pagina que ha solicitado no puede ser encontrada</p>
+  <p class="output">Puede redirigirse a <a href="https://joropo.com">www.joropo.com</a> </p>
+  <p class="output">Disculpe los inconvenientes</p>
+</div>
+</body>
+</html>

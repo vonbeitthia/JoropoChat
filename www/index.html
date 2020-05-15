@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
+<html>
+<title>Bienvenido a JoropoChat</title>
+<link href="styles/main.css" type="text/css" rel="stylesheet">
+<script src="/socket.io/socket.io.js"></script>
+<script src="scripts/TweenMax.min.js"></script>
+<script src="scripts/jquery.min.js"></script>
+<body>
+<!--<div id="login-button">
+  <img src="https://dqcgrsy5v35b9.cloudfront.net/cruiseplanner/assets/img/icons/login-w-icon.png">
+  </img>
+</div>-->
+<div id="container">
+  <h1>Ingresar</h1>
+  <span class="close-btn">
+    <img src="https://cdn4.iconfinder.com/data/icons/miu/22/circle_close_delete_-128.png"></img>
+  </span>
+
+  <form  method="POST" onsubmit="return validar()" >
+    <input type="text" name="login" id="login" placeholder="usuario" required="" tabindex="0" maxlength="11" onfocus="insGet(instrMsg.login)"  >
+    <input type="password" name="password" id="password" autocomplete="" placeholder="contraseña" tabindex="1" required="" onfocus="insGet(instrMsg.password)" >
+    <button type="submit" >Ingresar</button>
+	</form>
+	<p id="instr">Ingrese los datos solicitados</p>
+	 <p id="forgotten">Olvidé mi contraseña</p>
+</div>
+
+<!-- Forgotten Password Container -->
+<div id="forgotten-container">
+   <h1>Recuperar</h1>
+  <span class="close-btn">
+    <img src="https://cdn4.iconfinder.com/data/icons/miu/22/circle_close_delete_-128.png"></img>
+  </span>
+
+  <form>
+    <input type="email" name="email" placeholder="E-mail">
+    <a href="#" class="orange-btn">Obtener contraseña</a>
+</form>
+</div>
+<script>
+//$('#login-button').click(function(){
+//  $('#login-button').fadeOut("slow",function(){
+//    $("#container").fadeIn();
+//    TweenMax.from("#container", .4, { scale: 0, ease:Sine.easeInOut});
+//    TweenMax.to("#container", .4, { scale: 1, ease:Sine.easeInOut});
+//  });
+//});
+
+
+$(document).ready(function() {
+    $("#container").fadeIn();
+    TweenMax.from("#container", .4, { scale: 0, ease:Sine.easeInOut});
+    TweenMax.to("#container", .4, { scale: 1, ease:Sine.easeInOut});   
+});
+
+$(".close-btn").click(function(){
+  TweenMax.from("#container", .4, { scale: 1, ease:Sine.easeInOut});
+  TweenMax.to("#container", .4, { left:"0px", scale: 0, ease:Sine.easeInOut});
+  $("#container, #forgotten-container").fadeOut(800, function(){
+    $("#login-button").fadeIn(800);
+  });
+});
+
+/* Forgotten Password */
+$('#forgotten').click(function(){
+  $("#container").fadeOut(function(){
+    $("#forgotten-container").fadeIn();
+  });
+});
+
+
+
+const instrMsg = { login : "login 8-11 caracteres requeridos sin espacios" ,
+									 password : "contraseña 8 caracteres requeridos sin espacios" ,
+									 error1 : "Login NO puede contener espacios en blanco",
+									 error2 : "Contraseña NO puede contener espacios en blanco",
+									 error3 : "Contraseña debe contener al menos 1 caracter en mayuscula, de 1 a 3 digitos (0-9) y un signo . # @"  
+									} ;
+
+function insGet(mensaje){ //mensaje para instrucciones
+elemento = document.getElementById("instr");
+elemento.textContent = mensaje;
+}
+
+
+function validar() {
+//efectuamos validaciones de datos
+
+var campo1 = document.getElementById('login').value;
+var campo2 = document.getElementById('password').value;
+if( /(\s+)/.test(campo1) ) {
+	insGet(instrMsg.error1);
+	return false;
+}
+if( campo1.length < 7 || campo1.length > 10 ){
+	insGet(instrMsg.login);
+	return false;
+} 
+if( /\s/.test(campo2) ) {
+	insGet(instrMsg.error2);
+	return false;
+}
+if( campo2.length !== 8  ) {
+	insGet(instrMsg.password);
+	return false;
+} 
+if( ! /[A-Z][0-9]{1,3}(\.|\#|\@)/.test(campo2) ) {
+	insGet(instrMsg.error3);
+	return false;
+}
+return true;
+} // fin function validar
+</script>
+
+</body>
+</html>

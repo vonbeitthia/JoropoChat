@@ -1,0 +1,19 @@
+{
+  "name": "joropochat",
+  "version": "1.0.0",
+  "description": "joropo Chat Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "vonbeitthia",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "helmet": "^3.22.0",
+    "mongodb": "^3.5.7",
+    "socket.io": "^2.3.0"
+  }
+}
